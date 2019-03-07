@@ -8,7 +8,6 @@ void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final wordPair = new WordPair.random();
     return new MaterialApp(
         title: 'Welcome to Flutter',
         home: new Scaffold(
@@ -16,6 +15,22 @@ class MyApp extends StatelessWidget {
             appBar: new AppBar(
               title: new Text('Welcome to Flutter'),
             ),
-            body: new Center(child: new Text(wordPair.asPascalCase))));
+            body: new Center(child: new RandomWords())));
+  }
+}
+
+/* Stateless widgets 是不可变的意味着属性不能改变 所有值是不可变的
+   Stateful widgets 持有的状态可能在widget生命周期中发生变化
+*/
+class RandomWords extends StatefulWidget {
+  @override
+  createState() => new RandomWordsState();
+}
+
+class RandomWordsState extends State<RandomWords> {
+  @override
+  Widget build(BuildContext context) {
+    final wordPair = new WordPair.random();
+    return Text(wordPair.asPascalCase);
   }
 }
